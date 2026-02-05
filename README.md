@@ -2,6 +2,8 @@
 
 Voice commands to control Blender 5.0 viewport using Talon Voice.
 
+> **📦 Companion Repository**: This works with the [Blender Talon Voice Addon](https://github.com/YOUR_USERNAME/blender-talon-addon) which runs inside Blender to receive voice commands.
+
 ## Prerequisites
 
 1. **Blender 5.0** installed with the Talon Voice Control addon enabled

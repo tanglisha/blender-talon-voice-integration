@@ -261,5 +261,42 @@ def test_zoom_command_success(mock_server, blender_control_module):
     assert mock_server.received_commands[0]['amount'] == 5
 
 
+@pytest.mark.parametrize('direction,description', [
+    ([-15, 0], 'orbit left'),
+    ([15, 0], 'orbit right'),
+    ([0, 15], 'orbit up'),
+    ([0, -15], 'orbit down'),
+])
+def test_orbit_commands_format(mock_server, blender_control_module, direction, description):
+    """Test that orbit commands are formatted correctly"""
+    blender_control_module.BLENDER_PORT = 9999
+
+    from blender_control import send_blender_command
+
+    mock_server.received_commands.clear()
+    send_blender_command('orbit', direction=direction)
+    time.sleep(0.1)
+
+    assert len(mock_server.received_commands) == 1, f"Failed for {description}"
+    cmd = mock_server.received_commands[0]
+    assert cmd['action'] == 'orbit'
+    assert cmd['direction'] == direction
+
+
+def test_orbit_command_success(mock_server, blender_control_module):
+    """Test sending an orbit command successfully"""
+    blender_control_module.BLENDER_PORT = 9999
+
+    from blender_control import send_blender_command
+
+    result = send_blender_command('orbit', direction=[15, 10])
+
+    assert result is True
+    time.sleep(0.2)
+    assert len(mock_server.received_commands) == 1
+    assert mock_server.received_commands[0]['action'] == 'orbit'
+    assert mock_server.received_commands[0]['direction'] == [15, 10]
+
+
 if __name__ == '__main__':
     pytest.main([__file__, '-v'])

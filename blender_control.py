@@ -78,3 +78,23 @@ class BlenderActions:
     def blender_zoom_out(amount: int = 5):
         """Zoom out from the viewport"""
         send_blender_command('zoom', amount=-amount)
+
+    def blender_orbit(direction_x: int, direction_y: int):
+        """Orbit the 3D viewport in the specified direction"""
+        send_blender_command('orbit', direction=[direction_x, direction_y])
+
+    def blender_orbit_left(amount: int = 15):
+        """Orbit the viewport left"""
+        send_blender_command('orbit', direction=[-amount, 0])
+
+    def blender_orbit_right(amount: int = 15):
+        """Orbit the viewport right"""
+        send_blender_command('orbit', direction=[amount, 0])
+
+    def blender_orbit_up(amount: int = 15):
+        """Orbit the viewport up"""
+        send_blender_command('orbit', direction=[0, amount])
+
+    def blender_orbit_down(amount: int = 15):
+        """Orbit the viewport down"""
+        send_blender_command('orbit', direction=[0, -amount])

@@ -42,3 +42,27 @@ view zoom out slow: user.blender_zoom_out(2)
 # Numbered zoom commands for precise control
 view zoom in <number_small>: user.blender_zoom_in(number_small)
 view zoom out <number_small>: user.blender_zoom_out(number_small)
+
+# Viewport orbit commands
+view orbit left: user.blender_orbit_left(15)
+view orbit right: user.blender_orbit_right(15)
+view orbit up: user.blender_orbit_up(15)
+view orbit down: user.blender_orbit_down(15)
+
+# Faster orbiting with "far"
+view orbit left far: user.blender_orbit_left(45)
+view orbit right far: user.blender_orbit_right(45)
+view orbit up far: user.blender_orbit_up(45)
+view orbit down far: user.blender_orbit_down(45)
+
+# Slower orbiting with "slow"
+view orbit left slow: user.blender_orbit_left(5)
+view orbit right slow: user.blender_orbit_right(5)
+view orbit up slow: user.blender_orbit_up(5)
+view orbit down slow: user.blender_orbit_down(5)
+
+# Numbered orbit commands for precise control
+view orbit left <number_small>: user.blender_orbit_left(number_small)
+view orbit right <number_small>: user.blender_orbit_right(number_small)
+view orbit up <number_small>: user.blender_orbit_up(number_small)
+view orbit down <number_small>: user.blender_orbit_down(number_small)

@@ -130,3 +130,31 @@ class BlenderActions:
     def blender_view_camera():
         """Switch to camera view"""
         send_blender_command('view_preset', view='camera')
+
+    def blender_mode_object():
+        """Switch to Object mode"""
+        send_blender_command('mode_set', mode='OBJECT')
+
+    def blender_mode_edit():
+        """Switch to Edit mode"""
+        send_blender_command('mode_set', mode='EDIT')
+
+    def blender_mode_sculpt():
+        """Switch to Sculpt mode"""
+        send_blender_command('mode_set', mode='SCULPT')
+
+    def blender_mode_vertex_paint():
+        """Switch to Vertex Paint mode"""
+        send_blender_command('mode_set', mode='VERTEX_PAINT')
+
+    def blender_mode_weight_paint():
+        """Switch to Weight Paint mode"""
+        send_blender_command('mode_set', mode='WEIGHT_PAINT')
+
+    def blender_mode_texture_paint():
+        """Switch to Texture Paint mode"""
+        send_blender_command('mode_set', mode='TEXTURE_PAINT')
+
+    def blender_mode_pose():
+        """Switch to Pose mode (for armatures)"""
+        send_blender_command('mode_set', mode='POSE')

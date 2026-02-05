@@ -331,5 +331,24 @@ def test_view_preset_commands(mock_server, blender_control_module, view_type):
     assert cmd['view'] == view_type
 
 
+@pytest.mark.parametrize('mode', [
+    'OBJECT', 'EDIT', 'SCULPT', 'VERTEX_PAINT', 'WEIGHT_PAINT', 'TEXTURE_PAINT', 'POSE'
+])
+def test_mode_set_commands(mock_server, blender_control_module, mode):
+    """Test that mode_set commands are formatted correctly"""
+    blender_control_module.BLENDER_PORT = 9999
+
+    from blender_control import send_blender_command
+
+    mock_server.received_commands.clear()
+    send_blender_command('mode_set', mode=mode)
+    time.sleep(0.1)
+
+    assert len(mock_server.received_commands) == 1
+    cmd = mock_server.received_commands[0]
+    assert cmd['action'] == 'mode_set'
+    assert cmd['mode'] == mode
+
+
 if __name__ == '__main__':
     pytest.main([__file__, '-v'])

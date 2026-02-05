@@ -78,3 +78,12 @@ view left: user.blender_view_left()
 view top: user.blender_view_top()
 view bottom: user.blender_view_bottom()
 view camera: user.blender_view_camera()
+
+# Mode switching
+mode object | object mode: user.blender_mode_object()
+mode edit | edit mode: user.blender_mode_edit()
+mode sculpt | sculpt mode: user.blender_mode_sculpt()
+mode vertex paint | vertex paint mode: user.blender_mode_vertex_paint()
+mode weight paint | weight paint mode: user.blender_mode_weight_paint()
+mode texture paint | texture paint mode: user.blender_mode_texture_paint()
+mode pose | pose mode: user.blender_mode_pose()

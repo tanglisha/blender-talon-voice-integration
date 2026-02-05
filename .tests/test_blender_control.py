@@ -78,8 +78,8 @@ def mock_server_alt():
 @pytest.fixture
 def blender_control_module():
     """Fixture that mocks talon and imports blender_control"""
-    # Add current directory to path
-    sys.path.insert(0, os.path.dirname(__file__))
+    # Add parent directory to path (since we're now in tests/)
+    sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
     # Mock the talon module
     sys.modules['talon'] = MagicMock()
@@ -222,6 +222,43 @@ def test_invalid_json_characters(mock_server_alt, test_str):
     finally:
         # Restore original port
         blender_control.BLENDER_PORT = original_port
+
+
+@pytest.mark.parametrize('amount,description', [
+    (1, 'zoom in small'),
+    (10, 'zoom in medium'),
+    (-1, 'zoom out small'),
+    (-10, 'zoom out medium'),
+])
+def test_zoom_commands_format(mock_server, blender_control_module, amount, description):
+    """Test that zoom commands are formatted correctly"""
+    blender_control_module.BLENDER_PORT = 9999
+
+    from blender_control import send_blender_command
+
+    mock_server.received_commands.clear()
+    send_blender_command('zoom', amount=amount)
+    time.sleep(0.1)
+
+    assert len(mock_server.received_commands) == 1, f"Failed for {description}"
+    cmd = mock_server.received_commands[0]
+    assert cmd['action'] == 'zoom'
+    assert cmd['amount'] == amount
+
+
+def test_zoom_command_success(mock_server, blender_control_module):
+    """Test sending a zoom command successfully"""
+    blender_control_module.BLENDER_PORT = 9999
+
+    from blender_control import send_blender_command
+
+    result = send_blender_command('zoom', amount=5)
+
+    assert result is True
+    time.sleep(0.2)
+    assert len(mock_server.received_commands) == 1
+    assert mock_server.received_commands[0]['action'] == 'zoom'
+    assert mock_server.received_commands[0]['amount'] == 5
 
 
 if __name__ == '__main__':

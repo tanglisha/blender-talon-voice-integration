@@ -29,7 +29,7 @@ Enable it in Blender:
 The Talon scripts should be in `~/.talon/user/blender/`:
 - `blender_control.py` - Python module with control actions
 - `blender.talon` - Voice command definitions
-- `test_blender_control.py` - Test suite
+- `.tests/test_blender_control.py` - Test suite
 
 Talon will automatically load these files when it starts or when you reload the Talon configuration.
 
@@ -74,8 +74,8 @@ This tests the Talon command module using pytest (uses test ports, not the produ
 3. In Blender, say one of the voice commands:
    - "view pan left"
    - "view pan right"
-   - "view pan up"
-   - "view pan down"
+   - "view zoom in"
+   - "view zoom out"
 
 ## Available Voice Commands
 
@@ -97,6 +97,18 @@ This tests the Talon command module using pytest (uses test ports, not the produ
 - **"view pan up slow"** - Pan viewport up slowly (30 units)
 - **"view pan down slow"** - Pan viewport down slowly (30 units)
 
+### Basic Zooming
+- **"view zoom in"** - Zoom in (5 units)
+- **"view zoom out"** - Zoom out (5 units)
+
+### Fast Zooming
+- **"view zoom in far"** - Zoom in quickly (15 units)
+- **"view zoom out far"** - Zoom out quickly (15 units)
+
+### Slow Zooming
+- **"view zoom in slow"** - Zoom in slowly (2 units)
+- **"view zoom out slow"** - Zoom out slowly (2 units)
+
 ## Architecture
 
 ### Communication Flow
@@ -115,6 +127,7 @@ Voice Command → Talon → UDP Socket → Blender Addon → Viewport Action
 
 Commands are sent as JSON over UDP:
 
+**Pan command:**
 ```json
 {
   "action": "pan",
@@ -122,10 +135,19 @@ Commands are sent as JSON over UDP:
 }
 ```
 
-- **action**: The type of action (currently only "pan" is supported)
 - **direction**: Array with [x, y] movement values
   - Negative x = left, Positive x = right
   - Negative y = down, Positive y = up
+
+**Zoom command:**
+```json
+{
+  "action": "zoom",
+  "amount": 5
+}
+```
+
+- **amount**: Zoom amount (positive = zoom in, negative = zoom out)
 
 ## Troubleshooting
 
@@ -187,7 +209,7 @@ To add new voice commands:
    view zoom out: user.blender_zoom(-10)
    ```
 
-4. **Add tests** (`test_blender_control.py`):
+4. **Add tests** (`.tests/test_blender_control.py`):
    ```python
    def test_zoom_command(self):
        send_blender_command('zoom', amount=10)

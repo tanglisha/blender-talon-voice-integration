@@ -20,3 +20,25 @@ view pan left slow: user.blender_pan_left(30)
 view pan right slow: user.blender_pan_right(30)
 view pan up slow: user.blender_pan_up(30)
 view pan down slow: user.blender_pan_down(30)
+
+# Numbered pan commands for precise control
+view pan left <number_small>: user.blender_pan_left(number_small)
+view pan right <number_small>: user.blender_pan_right(number_small)
+view pan up <number_small>: user.blender_pan_up(number_small)
+view pan down <number_small>: user.blender_pan_down(number_small)
+
+# Viewport zoom commands
+view zoom in: user.blender_zoom_in(5)
+view zoom out: user.blender_zoom_out(5)
+
+# Faster zooming with "far"
+view zoom in far: user.blender_zoom_in(15)
+view zoom out far: user.blender_zoom_out(15)
+
+# Slower zooming with "slow"
+view zoom in slow: user.blender_zoom_in(2)
+view zoom out slow: user.blender_zoom_out(2)
+
+# Numbered zoom commands for precise control
+view zoom in <number_small>: user.blender_zoom_in(number_small)
+view zoom out <number_small>: user.blender_zoom_out(number_small)

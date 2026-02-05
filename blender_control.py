@@ -66,3 +66,15 @@ class BlenderActions:
     def blender_pan_down(amount: int = 100):
         """Pan the viewport down"""
         send_blender_command('pan', direction=[0, -amount])
+
+    def blender_zoom(amount: int):
+        """Zoom the 3D viewport (positive = in, negative = out)"""
+        send_blender_command('zoom', amount=amount)
+
+    def blender_zoom_in(amount: int = 5):
+        """Zoom in on the viewport"""
+        send_blender_command('zoom', amount=amount)
+
+    def blender_zoom_out(amount: int = 5):
+        """Zoom out from the viewport"""
+        send_blender_command('zoom', amount=-amount)

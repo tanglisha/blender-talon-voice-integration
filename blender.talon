@@ -66,3 +66,15 @@ view orbit left <number_small>: user.blender_orbit_left(number_small)
 view orbit right <number_small>: user.blender_orbit_right(number_small)
 view orbit up <number_small>: user.blender_orbit_up(number_small)
 view orbit down <number_small>: user.blender_orbit_down(number_small)
+
+# Frame selected object
+view frame selected | frame selected: user.blender_frame_selected()
+
+# Preset views
+view front: user.blender_view_front()
+view back: user.blender_view_back()
+view right: user.blender_view_right()
+view left: user.blender_view_left()
+view top: user.blender_view_top()
+view bottom: user.blender_view_bottom()
+view camera: user.blender_view_camera()

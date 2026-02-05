@@ -298,5 +298,38 @@ def test_orbit_command_success(mock_server, blender_control_module):
     assert mock_server.received_commands[0]['direction'] == [15, 10]
 
 
+def test_frame_selected_command(mock_server, blender_control_module):
+    """Test sending a frame selected command"""
+    blender_control_module.BLENDER_PORT = 9999
+
+    from blender_control import send_blender_command
+
+    result = send_blender_command('frame_selected')
+
+    assert result is True
+    time.sleep(0.2)
+    assert len(mock_server.received_commands) == 1
+    assert mock_server.received_commands[0]['action'] == 'frame_selected'
+
+
+@pytest.mark.parametrize('view_type', [
+    'front', 'back', 'right', 'left', 'top', 'bottom', 'camera'
+])
+def test_view_preset_commands(mock_server, blender_control_module, view_type):
+    """Test that view preset commands are formatted correctly"""
+    blender_control_module.BLENDER_PORT = 9999
+
+    from blender_control import send_blender_command
+
+    mock_server.received_commands.clear()
+    send_blender_command('view_preset', view=view_type)
+    time.sleep(0.1)
+
+    assert len(mock_server.received_commands) == 1
+    cmd = mock_server.received_commands[0]
+    assert cmd['action'] == 'view_preset'
+    assert cmd['view'] == view_type
+
+
 if __name__ == '__main__':
     pytest.main([__file__, '-v'])

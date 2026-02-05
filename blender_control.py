@@ -98,3 +98,35 @@ class BlenderActions:
     def blender_orbit_down(amount: int = 15):
         """Orbit the viewport down"""
         send_blender_command('orbit', direction=[0, -amount])
+
+    def blender_frame_selected():
+        """Frame the selected object in the viewport"""
+        send_blender_command('frame_selected')
+
+    def blender_view_front():
+        """Switch to front view"""
+        send_blender_command('view_preset', view='front')
+
+    def blender_view_back():
+        """Switch to back view"""
+        send_blender_command('view_preset', view='back')
+
+    def blender_view_right():
+        """Switch to right side view"""
+        send_blender_command('view_preset', view='right')
+
+    def blender_view_left():
+        """Switch to left side view"""
+        send_blender_command('view_preset', view='left')
+
+    def blender_view_top():
+        """Switch to top view"""
+        send_blender_command('view_preset', view='top')
+
+    def blender_view_bottom():
+        """Switch to bottom view"""
+        send_blender_command('view_preset', view='bottom')
+
+    def blender_view_camera():
+        """Switch to camera view"""
+        send_blender_command('view_preset', view='camera')

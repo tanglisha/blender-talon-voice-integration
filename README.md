@@ -51,11 +51,21 @@ This tests the UDP connection to Blender directly.
 From the Talon scripts directory:
 
 ```bash
-cd ~/.talon/user/blender
-python3 test_blender_control.py -v
+pushd ~/.talon/user/blender
+.venv/bin/pytest -v
+popd
 ```
 
-This tests the Talon command module (uses test ports, not the production Blender instance).
+Or run directly with pytest after installing dev dependencies:
+
+```bash
+pushd ~/.talon/user/blender
+uv sync --extra dev
+.venv/bin/pytest
+popd
+```
+
+This tests the Talon command module using pytest (uses test ports, not the production Blender instance).
 
 ### Test Voice Commands
 

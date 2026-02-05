@@ -1,0 +1,18 @@
+[project]
+name = "blender-talon-control"
+version = "1.0.0"
+description = "Talon voice commands for Blender viewport control"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-timeout>=2.2.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["."]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"

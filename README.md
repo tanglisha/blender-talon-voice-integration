@@ -2,7 +2,7 @@
 
 Control Blender's viewport with Talon voice commands via UDP socket communication.
 
-> **📦 Companion Repository**: This works with the [Talon Voice Commands for Blender](https://github.com/YOUR_USERNAME/talon-blender-commands) which provides the voice command definitions.
+> **📦 Companion Repository**: This works with the [Talon Voice Commands for Blender](https://github.com/tanglisha/talon-voice-to-blender) which provides the voice command definitions.
 
 ## Installation
 

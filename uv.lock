@@ -1,0 +1,24 @@
+version = 1
+requires-python = ">=3.11"
+
+[[package]]
+name = "fake-bpy-module-latest"
+version = "20260204"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/48/de/d417f7b77db23e618eac7ef0263de7d22d94f7b4cc86464ce6b27568b2be/fake_bpy_module_latest-20260204.tar.gz", hash = "sha256:a2efc89e6e3de85ef8da738d7b7a609b93d5c4e4aa3805b62466cac90ef90762", size = 910884 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/13/54/8ff425e8e274772bce90f325f99488754c0e9f2935f56c926c32e342031c/fake_bpy_module_latest-20260204-py3-none-any.whl", hash = "sha256:24fff49ba760d43834a8c1fe07f8aa506d2e6a1cb6404751279371e1335568ad", size = 1041884 },
+]
+
+[[package]]
+name = "talon-blender"
+version = "1.0.1"
+source = { virtual = "." }
+
+[package.optional-dependencies]
+dev = [
+    { name = "fake-bpy-module-latest" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "fake-bpy-module-latest", marker = "extra == 'dev'" }]

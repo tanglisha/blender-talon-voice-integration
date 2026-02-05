@@ -27,6 +27,27 @@ python test_connection.py
 
 You should see the 3D viewport camera pan in different directions.
 
+### 3. Run Integration Tests
+
+Run automated integration tests inside Blender:
+
+```bash
+./run_tests.sh
+```
+
+Or run directly with Blender:
+
+```bash
+blender --background --python test_addon.py
+```
+
+The integration tests verify:
+- Addon is loaded and enabled
+- UDP listener is running on port 9876
+- Pan commands modify the viewport
+- Invalid actions are handled gracefully
+- Malformed JSON is handled safely
+
 ## Current Commands
 
 - **Pan view**: The addon listens for pan commands with x/y direction values

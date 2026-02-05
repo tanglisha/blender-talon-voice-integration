@@ -28,7 +28,7 @@ class TalonListener(threading.Thread):
     def run(self):
         while self.running:
             try:
-                data, addr = self.sock.recvfrom(1024)
+                data, _ = self.sock.recvfrom(1024)
                 cmd = json.loads(data.decode())
                 # Schedule command execution on main thread
                 bpy.app.timers.register(lambda c=cmd: self.execute_command(c))

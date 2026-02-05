@@ -1,0 +1,14 @@
+[project]
+name = "talon-blender"
+version = "1.0.1"
+description = "Blender addon for Talon voice control integration"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "fake-bpy-module-latest",
+]
+
+[tool.pyright]
+typeCheckingMode = "basic"

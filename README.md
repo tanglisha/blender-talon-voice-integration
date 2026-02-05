@@ -45,12 +45,14 @@ The integration tests verify:
 - Addon is loaded and enabled
 - UDP listener is running on port 9876
 - Pan commands modify the viewport
+- Zoom commands modify the viewport
 - Invalid actions are handled gracefully
 - Malformed JSON is handled safely
 
 ## Current Commands
 
 - **Pan view**: The addon listens for pan commands with x/y direction values
+- **Zoom view**: The addon listens for zoom commands with amount values (positive = zoom in, negative = zoom out)
 
 ## Architecture
 

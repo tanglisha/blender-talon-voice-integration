@@ -73,6 +73,37 @@ class TalonListener(threading.Thread):
                     
                     print(f"Executed pan: {direction}")
                     break
+
+        elif action == 'zoom':
+            amount = cmd.get('amount', 0)
+
+            # Find the 3D viewport
+            for area in bpy.context.screen.areas:
+                if area.type == 'VIEW_3D':
+                    # Get the 3D view space
+                    space = area.spaces.active
+                    rv3d = space.region_3d
+
+                    # Zoom by adjusting view_distance
+                    # Positive amount = zoom in (decrease distance)
+                    # Negative amount = zoom out (increase distance)
+                    # Scale the zoom based on current distance for smooth operation
+                    zoom_factor = amount * rv3d.view_distance * 0.01
+                    new_distance = rv3d.view_distance - zoom_factor
+
+                    # Clamp to reasonable values (prevent getting too close or too far)
+                    min_distance = 0.1
+                    max_distance = 10000.0
+                    rv3d.view_distance = max(min_distance, min(max_distance, new_distance))
+
+                    # Force view update
+                    for region in area.regions:
+                        if region.type == 'WINDOW':
+                            region.tag_redraw()
+
+                    print(f"Executed zoom: {amount} (new distance: {rv3d.view_distance:.2f})")
+                    break
+
         else:
             print(f"Unknown action: {action}")
 

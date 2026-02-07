@@ -78,8 +78,8 @@ def mock_server_alt():
 @pytest.fixture
 def blender_control_module():
     """Fixture that mocks talon and imports blender_control"""
-    # Add parent directory to path (since we're now in tests/)
-    sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+    # Add current directory to path
+    sys.path.insert(0, os.path.dirname(__file__))
 
     # Mock the talon module
     sys.modules['talon'] = MagicMock()

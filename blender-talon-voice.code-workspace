@@ -1,0 +1,27 @@
+{
+	"folders": [
+		{
+			"path": "talon",
+			"name": "Talon Commands"
+		},
+		{
+			"path": "blender-addon",
+			"name": "Blender Addon"
+		}
+	],
+	"settings": {
+		"python.analysis.extraPaths": [
+			"${workspaceFolder:Talon Commands}",
+			"${workspaceFolder:Blender Addon}"
+		],
+		"python.testing.pytestEnabled": true,
+		"python.testing.pytestArgs": [
+			"-v"
+		],
+		"files.exclude": {
+			"**/__pycache__": true,
+			"**/.pytest_cache": true,
+			"**/.venv": true
+		}
+	}
+}

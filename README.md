@@ -1,48 +1,74 @@
 # Talon Voice Control for Blender
 
-Voice commands to control Blender 5.0 viewport using Talon Voice.
+Voice commands to control Blender 5.1 viewport using Talon Voice.
 
-> **📦 Companion Repository**: This works with the [Blender Talon Voice Addon](https://github.com/tanglisha/blender-talon-voice-integration) which runs inside Blender to receive voice commands.
+This monorepo contains both the Talon voice commands and the Blender addon required for operation.
 
 ## Prerequisites
 
-1. **Blender 5.0** installed with the Talon Voice Control addon enabled
+1. **Blender 5.1** installed with the Talon Voice Control addon enabled
 2. **Talon Voice** installed and running
 3. Python 3.x for testing
 
 ## Installation
 
-### 1. Install Blender Addon
+### Quick Install
 
-The Blender addon should already be installed at:
-- Linux: `~/.config/blender/5.0/scripts/addons/talon_blender/`
-- macOS: `~/Library/Application Support/Blender/5.0/scripts/addons/talon_blender/`
-- Windows: `%APPDATA%\Blender Foundation\Blender\5.0\scripts\addons\talon_blender\`
+Clone this repository and run the installation script:
 
-Enable it in Blender:
+```bash
+git clone https://github.com/tanglisha/blender-talon-voice.git
+cd blender-talon-voice/talon
+./install.sh
+```
+
+This will copy the Talon scripts and Blender addon to their required locations.
+
+### Development Install
+
+For active development with live updates:
+
+```bash
+git clone https://github.com/tanglisha/blender-talon-voice.git
+cd blender-talon-voice/talon
+./dev-install.sh
+```
+
+This creates symlinks so changes in the repository immediately affect Talon and Blender.
+
+### Manual Installation
+
+If you prefer to install manually:
+
+**Talon scripts** should be in `~/.talon/user/blender/`:
+- `blender_control.py` - Python module with control actions
+- `blender.talon` - Voice command definitions
+- `test_blender_control.py` - Test suite
+
+**Blender addon** should be installed at:
+- Linux: `~/.config/blender/5.1/scripts/addons/talon_blender/`
+- macOS: `~/Library/Application Support/Blender/5.1/scripts/addons/talon_blender/`
+- Windows: `%APPDATA%\Blender Foundation\Blender\5.1\scripts\addons\talon_blender\`
+
+### Enable Blender Addon
+
+After installation:
 1. Open Blender
 2. Go to Edit → Preferences → Add-ons
 3. Search for "Talon Voice Control"
 4. Enable the checkbox
 5. Check the console for "Talon listener started on port 9876"
 
-### 2. Install Talon Scripts
-
-The Talon scripts should be in `~/.talon/user/blender/`:
-- `blender_control.py` - Python module with control actions
-- `blender.talon` - Voice command definitions
-- `.tests/test_blender_control.py` - Test suite
-
-Talon will automatically load these files when it starts or when you reload the Talon configuration.
+Talon will automatically load the scripts when it starts or when you say "talon reload".
 
 ## Testing
 
 ### Test Blender Connection (without Talon)
 
-From the Blender addon directory:
+From the repository's blender-addon directory:
 
 ```bash
-cd ~/.config/blender/5.0/scripts/addons/talon_blender
+cd blender-addon
 ./test_connection.py
 ```
 
@@ -50,21 +76,12 @@ This tests the UDP connection to Blender directly.
 
 ### Test Talon Integration
 
-From the Talon scripts directory:
+From the repository's talon directory:
 
 ```bash
-pushd ~/.talon/user/blender
-.venv/bin/pytest -v
-popd
-```
-
-Or run directly with pytest after installing dev dependencies:
-
-```bash
-pushd ~/.talon/user/blender
+cd talon
 uv sync --extra dev
-.venv/bin/pytest
-popd
+.venv/bin/pytest -v
 ```
 
 This tests the Talon command module using pytest (uses test ports, not the production Blender instance).

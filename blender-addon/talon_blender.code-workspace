@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": ".",
+			"name": "Talon Blender Addon"
+		},
+		{
+			"path": "../blender_status_panel",
+			"name": "Status Panel Addon"
+		},
+		{
+			"path": "../../../../../../.talon/user/blender",
+			"name": "Talon Commands"
+		}
+	],
+	"settings": {
+		"python.analysis.extraPaths": [
+			"${workspaceFolder:Talon Blender Addon}",
+			"${workspaceFolder:Status Panel Addon}"
+		]
+	}
+}

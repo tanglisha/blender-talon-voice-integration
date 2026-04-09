@@ -7,8 +7,8 @@ Voice commands to control Blender 5.1 viewport using Talon Voice.
 ## Quick Start
 
 ```bash
-git clone https://github.com/tanglisha/blender-talon-voice.git
-cd blender-talon-voice/talon
+git clone https://github.com/tanglisha/blender-talon-voice-integration.git
+cd blender-talon-voice-integration/talon
 ./install.sh
 ```
 

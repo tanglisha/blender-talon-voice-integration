@@ -1,24 +1,29 @@
 #!/bin/bash
-# Run integration tests for Talon Blender addon
+# Run integration tests for Talon Blender addon using pytest-blender
 
 set -e  # Exit on error
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TEST_SCRIPT="$SCRIPT_DIR/test_addon.py"
 
-echo "Running Blender addon integration tests..."
-echo "Test script: $TEST_SCRIPT"
+echo "Running Blender addon integration tests with pytest-blender..."
 echo ""
 
-# Run Blender in background mode with the test script
-blender --background --python "$TEST_SCRIPT" 2>&1 | grep -E '(===|✓|✗|PASS|FAIL|TEST SUMMARY|Passed:|All tests|failed)'
+# Check if pytest-blender is installed
+if ! command -v pytest &> /dev/null; then
+    echo "Installing pytest and pytest-blender..."
+    pip install pytest pytest-blender
+fi
 
-# Capture the exit code
-exit_code=${PIPESTATUS[0]}
+# Run pytest with pytest-blender
+# This will automatically run tests inside Blender
+cd "$SCRIPT_DIR"
+pytest test_addon.py -v
+
+exit_code=$?
 
 if [ $exit_code -eq 0 ]; then
     echo ""
-    echo "✓ Tests passed"
+    echo "✓ All tests passed"
 else
     echo ""
     echo "✗ Tests failed (exit code: $exit_code)"

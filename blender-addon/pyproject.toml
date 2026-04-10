@@ -8,6 +8,8 @@ dependencies = []
 [project.optional-dependencies]
 dev = [
     "fake-bpy-module-latest",
+    "pytest>=8.0.0",
+    "pytest-blender>=0.2.0",
 ]
 
 [tool.pyright]
